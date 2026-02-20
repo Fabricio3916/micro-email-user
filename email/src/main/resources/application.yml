@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: email
+  datasource:
+    url: jdbc:postgresql://localhost:5433/ms_email_ms
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  rabbitmq:
+    addresses: ${RABBIT_ADDRESS}  # ← CORRIGIDO
+    username: ${RABBIT_USERNAME}
+    password: ${RABBIT_PASSWORD}
+    port: 5671
+
+  mail:
+    host: ${EMAIL_HOST}
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSKEY} # ← Senha de App do Gmail
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true  # ← CORRIGIDO indentação
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+server:
+  port: 8082
